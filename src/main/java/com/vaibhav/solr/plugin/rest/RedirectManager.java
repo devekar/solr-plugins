@@ -1,4 +1,4 @@
-package com.staples.solr.plugin.component;
+package com.vaibhav.solr.plugin.rest;
 
 import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import org.restlet.resource.ResourceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.staples.solr.plugin.vo.RedirectRule;
+import com.vaibhav.solr.plugin.vo.RedirectRule;
 
 /**
  * ManagedResource implementation for redirect rules. 

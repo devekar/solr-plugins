@@ -1,4 +1,4 @@
-package com.staples.solr.plugin.vo;
+package com.vaibhav.solr.plugin.vo;
 
 public enum MatchMode {
 	exact, phrase, all;

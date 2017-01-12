@@ -1,4 +1,4 @@
-package com.staples.solr.plugin.vo;
+package com.vaibhav.solr.plugin.vo;
 
 public abstract class Rule {
 	private Term term;
@@ -34,7 +34,8 @@ public abstract class Rule {
 		case exact:
 			return query.equals(term.getPhrase());
 		case phrase:
-			return query.contains(term.getPhrase());
+			// TODO: Use StringSearch library for performance
+			return query.matches(".*\\b" + term.getPhrase() + "\\b.*");
 		case all:
 			for(String word: term.getWords()) {
 				if(!query.contains(word)) {
