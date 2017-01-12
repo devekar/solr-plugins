@@ -1,4 +1,4 @@
-package com.staples.solr.plugin.component;
+package com.vaibhav.solr.plugin.component;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
@@ -18,14 +18,14 @@ import org.apache.solr.util.plugin.SolrCoreAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.staples.solr.plugin.vo.RedirectRule;
+import com.vaibhav.solr.plugin.vo.RedirectRule;
 
 public class ManagedRedirectComponent extends SearchComponent implements SolrCoreAware, ManagedResourceObserver {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private static final String DESCRIPTION = "An API managed component to handle redirect rules";
-	private static final String SOURCE = "http://bitbucket.staples.com/projects/SS/";
+	private static final String SOURCE = "";
 	private static final String VERSION = "1.0.0";
 	private static final String RESOURCE_ID = "/schema/analysis/redirect";
 	private static final String REDIRECT_FIELD = "redirectUrl";
@@ -54,6 +54,14 @@ public class ManagedRedirectComponent extends SearchComponent implements SolrCor
 	@Override
 	public void prepare(ResponseBuilder rb) throws IOException {		
 		String query = rb.req.getOriginalParams().get("q");
+		if(query == null) {
+			return;
+		}
+		
+		// TODO: Delegate query sanitization to a util
+		query = query.trim().toLowerCase();
+		query = query.replaceAll("\\s+", " ");
+		
 		Map<String, RedirectRule> rules = redirectManager.getRules();
 
 		for(RedirectRule rule: rules.values()) {
@@ -71,7 +79,7 @@ public class ManagedRedirectComponent extends SearchComponent implements SolrCor
 
 	/**
 	 * As long as this component is called before QueryComponent, 
-	 * this will skip query execution when rule has been applied 
+	 * this will skip query execution in distributed mode when rule has been applied 
 	 */
 	@Override
 	public int distributedProcess(ResponseBuilder rb) throws IOException {		
