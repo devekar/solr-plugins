@@ -18,7 +18,10 @@ import org.apache.solr.util.plugin.SolrCoreAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+<<<<<<< HEAD:src/main/java/com/vaibhav/solr/plugin/component/ManagedRedirectComponent.java
 import com.vaibhav.solr.plugin.rest.RedirectManager;
+=======
+>>>>>>> origin/master:src/main/java/com/vaibhav/solr/plugin/component/ManagedRedirectComponent.java
 import com.vaibhav.solr.plugin.vo.RedirectRule;
 
 /**
